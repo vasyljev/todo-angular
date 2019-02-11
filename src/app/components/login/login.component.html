@@ -1,0 +1,13 @@
+<section class="login-block">
+  <h2>
+    Please login or create your own account
+  </h2>
+  <div class="login-input-button-block">
+    <input type="text" name="login-input"  placeholder="Login" [(ngModel)]="usernameLogin" >
+    <input type="password" name="password-input" placeholder="Password" [(ngModel)]="passwordLogin">
+  </div>
+  <div class="login-input-button-block">
+    <button id="login-button" (click)="login(usernameLogin, passwordLogin)">Login</button>
+    <button id="go-to-sign-up-button" (click)="goToSignUp()" >Sign up!</button>
+  </div>
+</section>

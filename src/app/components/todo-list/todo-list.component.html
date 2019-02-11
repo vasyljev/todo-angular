@@ -1,0 +1,26 @@
+<section class="todo-list">
+  <h2>
+    Hello {{user.firstName}}!
+  </h2>
+  <h3>You must to do next tasks:</h3>
+  <ul>
+    <li *ngFor="let item of actualList" [id]="item['id']" [ngClass]="{completed: item['completed'] ? true : false}">
+      <input type="checkbox"  [checked]="item['completed'] ? true : false" name="toogleComplite" (click)="toogleComplite(item['id'], item['completed'])">
+      {{item['title']}} 
+      <div class="date-value">{{getDate(item['expires_at'])}}</div>
+      <div class="item-button-block">
+        <button (click)="applyEditMode(item['id'], item['title'], item['expires_at'], item['completed'])">Edit</button>
+        <button (click)="removeTodoItem(item['id'])">Remove</button>
+      </div>  
+    </li>
+  </ul>
+
+  <section class="edit-input">
+    <input type="text"  [(ngModel)]="itemTitle" [title]="itemTitle">
+    <input type="datetime-local" [(ngModel)]="itemDate" >
+    <button (click)="editOrAddItem(itemTitle, itemDate)">{{editMode ? 'Edit Item' : 'Add Item'}}</button>
+    <button id="cancel-button" (click)="cancelEditAdd()">Cancel</button>
+  </section>
+
+  <button (click)="logOut()">Log out</button>
+</section>
