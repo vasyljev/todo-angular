@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.user = new User(login, password);
     this.httpService.signIn(this.user).subscribe(resp => {
       this.loginResp = resp;
-      console.log('login', this.loginResp);
+      // console.log('login', this.loginResp);
       this.lsService.putInLocalStorage('user', this.loginResp['user']);
       this.lsService.putInLocalStorage('auth', this.loginResp['auth']);
       this.lsService.putInLocalStorage('token', this.loginResp['token']);

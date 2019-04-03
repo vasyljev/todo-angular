@@ -7,7 +7,7 @@
     <li *ngFor="let item of actualList" [id]="item['id']" [ngClass]="{completed: item['completed'] ? true : false}">
       <input type="checkbox"  [checked]="item['completed'] ? true : false" name="toogleComplite" (click)="toogleComplite(item['id'], item['completed'])">
       {{item['title']}} 
-      <div class="date-value">{{getDate(item['expires_at'])}}</div>
+      <p class="date-value">{{getDate(item['expires_at'])}}</p>
       <div class="item-button-block">
         <button (click)="applyEditMode(item['id'], item['title'], item['expires_at'], item['completed'])">Edit</button>
         <button (click)="removeTodoItem(item['id'])">Remove</button>

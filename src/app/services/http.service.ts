@@ -12,7 +12,7 @@ export class HttpService {
 
   signUp(user: User) {
 
-    this.http.post('https://node--api.herokuapp.com/users/sign_up', user).subscribe(resp => console.log(resp));
+    return this.http.post<{message: any}>('https://node--api.herokuapp.com/users/sign_up', user);
 
   }
 
@@ -32,13 +32,13 @@ export class HttpService {
 
   addTodoItem(token: string, title: string, expires_at: string) {
 
-    // let tmp = expires_at.split('T');
-    // let arrTmp = tmp.join('T') + ':00';
-    console.log('http date', expires_at);
+    let tmp = expires_at.split('T');
+    let arrTmp = tmp.join('T') + ':00.000Z';
     return this.http.post('https://node--api.herokuapp.com/todos', 
       {
         'title': title,
-        'expires_at': new Date (expires_at)
+        // 'expires_at': new Date (expires_at)
+        'expires_at': arrTmp
       },
       {
         headers: {
@@ -57,12 +57,13 @@ export class HttpService {
   }
 
   editTodoItem(token: string, itemId: number, title: string, expires_at: string, completed: boolean) {
-
+    let tmp = expires_at.split('T');
+    let arrTmp = tmp.join('T') + ':00.000Z';
     return this.http.put(`https://node--api.herokuapp.com/todos/${itemId}`, 
     {
       'completed': completed,
       'title': title,
-      'expires_at': expires_at
+      'expires_at': arrTmp
       
     },
     {

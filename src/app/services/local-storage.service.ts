@@ -21,9 +21,7 @@ export class LocalStorageService {
 
   removeTodoItem(id: number) {
     let tmp = this.takeFromLocalStorage('list');
-    console.log('tmp list', tmp);
     let filterList = tmp.filter(item => item['id'] != id);
-    console.log('tmp filter list', id, filterList);
     this.putInLocalStorage('list', filterList);
     return this.takeFromLocalStorage('list');
   }

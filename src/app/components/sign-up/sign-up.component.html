@@ -1,10 +1,16 @@
-<h2>
-  Please enter your data to sign up:
-</h2>
-<input type="text" name="name-sign-up-input" placeholder="Name" [(ngModel)]="firstNameSignUp">
-<input type="text" name="surname-sign-up-input" placeholder="Surname" [(ngModel)]="lastNameSignUp">
-<input type="text" name="login-sign-up-input" placeholder="Login" [(ngModel)]="loginSignUp">
-<input type="email" name="email-sign-up-input" placeholder="E-mail" [(ngModel)]="emailSignUp">
-<input type="password" name="password-sign-up-input" placeholder="Password" [(ngModel)]="passwordSignUp">
-<button id="sign-up-button" (click)="signUpUser(firstNameSignUp, lastNameSignUp, loginSignUp, emailSignUp, passwordSignUp)">Sign up!</button>
-<button id="go-to-login-button" (click)="goToLogin()">Go to Login</button>
+<section id="sign-up-section">
+  <h2>
+    Please enter your data to sign up:
+  </h2>
+  <div class="sign-up-input-block">
+    <input type="text" name="name-sign-up-input" placeholder="Name" [(ngModel)]="firstNameSignUp">
+    <input type="text" name="surname-sign-up-input" placeholder="Surname" [(ngModel)]="lastNameSignUp">
+    <input type="text" name="login-sign-up-input" placeholder="Login" [(ngModel)]="loginSignUp">
+    <input type="email" name="email-sign-up-input" placeholder="E-mail" [(ngModel)]="emailSignUp">
+    <input type="password" name="password-sign-up-input" placeholder="Password" [(ngModel)]="passwordSignUp">
+  </div>
+  <div class="sign-up-button-block">
+    <button id="sign-up-button" (click)="signUpUser(firstNameSignUp, lastNameSignUp, loginSignUp, emailSignUp, passwordSignUp)">Sign up!</button>
+    <button id="go-to-login-button" (click)="goToLogin()">Go to Login</button>
+  </div>
+</section>

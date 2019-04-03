@@ -11,7 +11,7 @@ import { HttpService } from '../../services/http.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit, OnChanges {
+export class TodoListComponent implements OnInit {
 
   
 
@@ -31,14 +31,10 @@ export class TodoListComponent implements OnInit, OnChanges {
   tmpComplite: boolean;
   
 
-  ngOnChanges() {
-    console.log('Change');
-  }
-
+ 
   ngOnInit() {
     this.redirectToLogin();
     this.user = this.lsService.takeFromLocalStorage('user');
-    console.log(this.user);
     this.token = this.lsService.takeFromLocalStorage('token');
   }
 
@@ -69,15 +65,12 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   addItem(title: string, expires_at: string) {
-    console.log('expires_at add', expires_at);
     let tmp = expires_at.split('.');
     let data = tmp[0];
     this.http.addTodoItem(this.token, title, data).subscribe(resp => {
-      console.log(resp);
       let tmpList = this.lsService.takeFromLocalStorage('list');
       tmpList.push(resp['data']);
       this.lsService.putInLocalStorage('list', tmpList);
-      console.log(tmpList);
       this.actualList = this.lsService.takeFromLocalStorage('list');
       this.itemDate = '';
       this.itemTitle = '';
@@ -86,36 +79,30 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   removeTodoItem(id: number) {
-
-    console.log('id', id);
-    this.http.removeTodoItem(this.token, id).subscribe(resp => console.log(resp));
+    this.http.removeTodoItem(this.token, id).subscribe();
     this.actualList = this.lsService.removeTodoItem(id);
 
   }
   
   applyEditMode(id: number, title: string, expires_at: string, completed: boolean) {
-
     this.itemTitle = title;
     let tmp = expires_at.split('.');
     let data = tmp[0];
     this.itemDate = data;
-    console.log('this.itemDate apply edit mode', this.itemDate);
     this.editMode = true;
     this.tmpID = id;
-    this.tmpComplite = completed;
-    
+    this.tmpComplite = completed;    
   }
 
   editTodoItem(id: number, title: string, expires_at: string, completed: boolean) {
 
-    this.http.editTodoItem(this.token, id, title, expires_at, completed).subscribe(resp => console.log(resp));
+    this.http.editTodoItem(this.token, id, title, expires_at, completed).subscribe();
     let list = this.lsService.takeFromLocalStorage('list');
     let tmpList = list.map(item => {
       if(item['id'] == id) {
         item['completed'] = completed;
         item['title'] = title;
         item['expires_at'] = expires_at;
-        console.log('expires_at edit todo', expires_at);
         return item;    
       }  else {
         return item;
@@ -127,7 +114,6 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   editOrAddItem(title: string, expires_at: string) {
-    console.log('expires_at edit or cr', expires_at);
     if(this.editMode) {
       this.editTodoItem(this.tmpID, title, expires_at, this.tmpComplite);
       this.cancelEditAdd();
@@ -137,7 +123,6 @@ export class TodoListComponent implements OnInit, OnChanges {
   }  
   
   cancelEditAdd() {
-
     this.editMode = false;
     this.itemDate = '';
     this.itemTitle = '';
@@ -145,8 +130,7 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   toogleComplite(id: number, completed: boolean) {
-
-    this.http.toogleChangeValue(this.token, id, completed).subscribe(resp=> console.log(resp));
+    this.http.toogleChangeValue(this.token, id, completed).subscribe();
     let list = this.lsService.takeFromLocalStorage('list');
     let tmpList = list.map(item => {
       if(item['id'] == id) {
