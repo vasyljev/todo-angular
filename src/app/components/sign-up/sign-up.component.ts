@@ -16,6 +16,12 @@ export class SignUpComponent implements OnInit {
     private httpService: HttpService,
     private _location: Location) { }
 
+  firstNameSignUp: string;
+  lastNameSignUp: string;
+  loginSignUp: string;
+  emailSignUp: string;
+  passwordSignUp: string;
+
   ngOnInit() {
     
   }

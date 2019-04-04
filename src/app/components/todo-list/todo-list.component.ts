@@ -21,7 +21,7 @@ export class TodoListComponent implements OnInit {
     private http: HttpService
   ) { }
 
-  private user: User;
+  user: User;
   private token: string;
   public actualList: string[] = this.lsService.takeFromLocalStorage('list');
   editMode: boolean = false;
@@ -29,6 +29,7 @@ export class TodoListComponent implements OnInit {
   itemDate: string;
   tmpID: number;
   tmpComplite: boolean;
+  
   
 
  

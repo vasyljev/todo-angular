@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     private httpService: HttpService,
     private lsService: LocalStorageService
     ) { }
-
+  usernameLogin: string;
+  passwordLogin: string;
   private user: User;
   private loginResp: object;
   private token: string;
@@ -26,9 +27,9 @@ export class LoginComponent implements OnInit {
     this.redirectTodoList();
   }
 
-  login(login: string, password: string) {
+  login(usernameLogin: string, passwordLogin: string) {
 
-    this.user = new User(login, password);
+    this.user = new User(usernameLogin, passwordLogin);
     this.httpService.signIn(this.user).subscribe(resp => {
       this.loginResp = resp;
       // console.log('login', this.loginResp);
